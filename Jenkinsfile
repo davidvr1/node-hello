@@ -1,14 +1,14 @@
 pipeline {
   agent {
     node {
-      label 'Docker-slave'
+      label 'docker-slave'
     }
 
   }
   stages {
     stage('Checkout code') {
       steps {
-        git(url: 'https://github.com/lidorg-dev/node-hello.git', branch: 'master', changelog: true, poll: true)
+        git(url: 'https://github.com/davidvr1/node-hello.git', branch: 'master', changelog: true, poll: true)
       }
     }
 
@@ -21,7 +21,7 @@ pipeline {
     stage('Push Docker Image') {
       steps {
         withDockerRegistry(credentialsId: 'docker-hub-creds', url: 'https://index.docker.io/v1/') {
-           sh '''docker tag node-hello:$BUILD_ID lidorlg/node-hello:$BUILD_ID && docker tag node-hello:$BUILD_ID lidorlg/node-hello:latest && docker push lidorlg/node-hello:$BUILD_ID && docker push lidorlg/node-hello:latest'''
+           sh '''docker tag node-hello:$BUILD_ID varshoer/node-hello:$BUILD_ID && docker tag node-hello:$BUILD_ID varshoer/node-hello:latest && docker push varshoer/node-hello:$BUILD_ID && docker push varshoer/node-hello:latest'''
          }
       }
     }
