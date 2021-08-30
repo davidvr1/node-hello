@@ -12,5 +12,11 @@ pipeline {
       }
     }
 
+    stage('Build docker image') {
+      steps {
+        sh 'docker build . -t node-hello:${env.BUILD_ID}'
+      }
+    }
+
   }
 }
