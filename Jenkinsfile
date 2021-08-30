@@ -20,7 +20,7 @@ pipeline {
 
     stage('push docker image') {
       steps {
-        docker.withRegistry('https://registry.hub.docker.com','docker-hub-creds'){
+        withDockerRegistry(credentialsId: 'docker-hub-creds', url: 'https://registry.hub.docker.com'){
         sh '''docker tag node-hello:$BUILD_ID varshoer/node-hello:$BUILD_ID && docker push varshoer/node-hello:$BUILD_ID'''
         }
       }
