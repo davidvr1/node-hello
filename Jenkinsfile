@@ -18,5 +18,13 @@ pipeline {
       }
     }
 
+    stage('push docker image') {
+      steps {
+        sh '''#docker login 
+#docker tag node-hello:$BUILD_ID varshoer/node-hello:$BUILD_ID 
+#&& docker push varshoer/node-hello:$BUILD_ID'''
+      }
+    }
+
   }
 }
